@@ -3,11 +3,11 @@ export const TMDB_CONFIG = {
     API_KEY: process.env.EXPO_PUBLIC_MOVIE_API_KEY,
     headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.EXPO_PUBLIC_MOVIE}`
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_MOVIE_API_KEY}`,
     }
 };
 
-export const fetchPopularMovies = async ({ query }: { query: string }) => {
+export const fetchMovies = async ({ query }: { query: string }) => {
     const endpoint = query ? `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(query)}` :
         `${TMDB_CONFIG.BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
@@ -17,11 +17,9 @@ export const fetchPopularMovies = async ({ query }: { query: string }) => {
     });
 
     if (!res.ok) {
-        // @ts-ignore
         throw new Error(`Failed to fetch movies: ${res.statusText}`);
     }
 
     const data = await res.json();
-
     return data.results;
 };
