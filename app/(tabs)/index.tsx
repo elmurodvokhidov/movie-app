@@ -54,7 +54,7 @@ export default function Index() {
               placeholder="Search for a movie"
             />
 
-            {trendingMovies && (
+            {trendingMovies && trendingMovies.length > 0 && (
               <View className="mt-10">
                 <Text className="text-lg text-white font-bold mb-3">
                   Trending Movies
